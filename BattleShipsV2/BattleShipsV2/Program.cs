@@ -10,13 +10,17 @@ namespace BattleShipsV2
     {
         static void Main(string[] args)
         {
-
-            var ran = new Random();
+            Random ran = NewMethod();
             var grid_x = 11;
             var grid_y = 11;
             var gridObject = new string[grid_x, grid_y];
             int direction = ran.Next(0, 1);
-            gridObject = DrawShip(direction,5,gridObject,ran);
+            gridObject = DrawShip(0, 2, gridObject, ran);
+            gridObject = DrawShip(0, 3, gridObject, ran);
+            gridObject = DrawShip(1, 3, gridObject, ran);
+            gridObject = DrawShip(1, 4, gridObject, ran);
+            gridObject = DrawShip(0, 5, gridObject, ran);
+
 
 
             for (var x = 1; x < grid_x; x++)
@@ -26,6 +30,9 @@ namespace BattleShipsV2
                     if (gridObject[x, y] == "V" || gridObject[x, y] == "H")
                     {
 
+                    }
+                    else
+                    {
                         gridObject[x, y] = "~";
 
                     }
@@ -36,6 +43,11 @@ namespace BattleShipsV2
 
             Display(grid_x, grid_y, gridObject);
             Console.ReadLine();
+        }
+
+        private static Random NewMethod()
+        {
+            return new Random();
         }
 
         static void Display(int gridX, int gridY, string[,] gridObject)
@@ -81,15 +93,15 @@ namespace BattleShipsV2
             {
                 if (direction == 1) //vertical
                 {
-                    var shipsY = ranN.Next(0, 9 - shipLength);
-                    var shipsX = ranN.Next(0, 9);
+                    var shipsY = ranN.Next(1, 9 - shipLength);
+                    var shipsX = ranN.Next(1, 9);
 
                     noShips = CheckForShips(1, shipsX, shipsY, grid, shipLength);
                     if (noShips)
                     {
                         for (var i = 0; i < shipLength; i++)
                         {
-                            grid[shipsX, shipsY++] = "V";
+                            grid[shipsX, shipsY++] = "H";
                         }
                     }
                     else
@@ -100,8 +112,8 @@ namespace BattleShipsV2
                 }
                 else //Horizontal
                 {
-                    var shipsX = ranN.Next(0, 9 - shipLength);
-                    var shipsY = ranN.Next(0, 9);
+                    var shipsX = ranN.Next(1, 9 - shipLength);
+                    var shipsY = ranN.Next(1, 9);
 
                     noShips = CheckForShips(0, shipsX, shipsY, grid, shipLength);
 
@@ -109,7 +121,7 @@ namespace BattleShipsV2
                     {
                         for (var i = 0; i < shipLength; i++)
                         {
-                            grid[shipsX++, shipsY] = "H";
+                            grid[shipsX++, shipsY] = "V";
                         }
                     }
                     else
@@ -126,10 +138,10 @@ namespace BattleShipsV2
         {
             if (direction == 1) //vertical
             {
-                for (var i = positionY; i < positionX + shipLength; i++)
+                for (var i = positionY; i < positionY + shipLength; i++)
 
                 {
-                    if (grid[i, positionY] != "V")
+                    if (grid[positionX, i] == "V" || grid[positionX, i] == "H")
                     {
                         return false;
                     }
@@ -137,9 +149,9 @@ namespace BattleShipsV2
             }
             else //Horizontal
             {
-                for (var i = positionX; i < shipLength + positionY; i++)
+                for (var i = positionX; i < shipLength + positionX; i++)
                 {
-                    if (grid[positionX, i] != "H")
+                    if (grid[i, positionY] == "H" || grid[positionX, i] == "V")
                     {
                         return false;
                     }
