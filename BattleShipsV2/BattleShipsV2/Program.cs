@@ -14,13 +14,21 @@ namespace BattleShipsV2
             var grid_x = 11;
             var grid_y = 11;
             var gridObject = new string[grid_x, grid_y];
-            int direction = ran.Next(0, 1);
-            gridObject = DrawShip(0, 2, gridObject, ran);
-            gridObject = DrawShip(0, 3, gridObject, ran);
-            gridObject = DrawShip(1, 3, gridObject, ran);
-            gridObject = DrawShip(1, 4, gridObject, ran);
-            gridObject = DrawShip(0, 5, gridObject, ran);
 
+            int direction = ran.Next(0, 1);
+            gridObject = DrawShip(direction, 2, gridObject, ran);
+
+            direction = ran.Next(0, 1);
+            gridObject = DrawShip(direction, 3, gridObject, ran);
+
+            direction = ran.Next(0, 1);
+            gridObject = DrawShip(direction, 3, gridObject, ran);
+
+            direction = ran.Next(0, 1);
+            gridObject = DrawShip(direction, 4, gridObject, ran);
+
+            direction = ran.Next(0, 1);
+            gridObject = DrawShip(direction, 5, gridObject, ran);
 
 
             for (var x = 1; x < grid_x; x++)
