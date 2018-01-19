@@ -15,9 +15,13 @@ namespace BattleShipsV2
             var grid_y = 11;
             var gridObject = new string[grid_x, grid_y];
 
-            gridObject = DrawShip(1, 2, gridObject, ran);
+            var shoot_x = 11;
+            var shoot_y = 11;
+            var gridShoot = new string[shoot_x, shoot_y];
+
+            gridObject = DrawShip(0, 2, gridObject, ran);
             gridObject = DrawShip(0, 3, gridObject, ran);
-            gridObject = DrawShip(0, 3, gridObject, ran);
+            gridObject = DrawShip(1, 3, gridObject, ran);
             gridObject = DrawShip(1, 4, gridObject, ran);
             gridObject = DrawShip(1, 5, gridObject, ran);
 
@@ -39,8 +43,19 @@ namespace BattleShipsV2
                 }
             }
 
+            for (var x = 1; x < shoot_x; x++)
+            {
+                for (var y = 1; y < shoot_y; y++)
+                {
+                
+                  gridShoot[x, y] = "~";
 
-            Display(grid_x, grid_y, gridObject);
+
+                }
+            }
+
+
+            Display(grid_x, grid_y, gridShoot);
             Console.ReadLine();
         }
 
