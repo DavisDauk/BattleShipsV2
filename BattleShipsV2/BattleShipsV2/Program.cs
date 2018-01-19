@@ -16,9 +16,9 @@ namespace BattleShipsV2
             var gridObject = new string[grid_x, grid_y];
 
             gridObject = DrawShip(1, 2, gridObject, ran);
-            gridObject = DrawShip(1, 3, gridObject, ran);
             gridObject = DrawShip(0, 3, gridObject, ran);
-            gridObject = DrawShip(0, 4, gridObject, ran);
+            gridObject = DrawShip(0, 3, gridObject, ran);
+            gridObject = DrawShip(1, 4, gridObject, ran);
             gridObject = DrawShip(1, 5, gridObject, ran);
 
 
