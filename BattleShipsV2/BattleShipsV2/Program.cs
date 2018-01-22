@@ -14,6 +14,7 @@ namespace BattleShipsV2
             var grid_x = 11;
             var grid_y = 11;
             var gridObject = new string[grid_x, grid_y];
+            int shipOnGrid = 0;
 
             var shoot_x = 11;
             var shoot_y = 11;
@@ -32,7 +33,7 @@ namespace BattleShipsV2
                 {
                     if (gridObject[x, y] == "V" || gridObject[x, y] == "H")
                     {
-
+                        shipOnGrid++;
                     }
                     else
                     {
@@ -55,7 +56,7 @@ namespace BattleShipsV2
             }
 
 
-            Display(grid_x, grid_y, gridShoot, gridObject);
+            Display(grid_x, grid_y, gridShoot, gridObject, shipOnGrid);
             Console.ReadLine();
         }
 
@@ -64,7 +65,7 @@ namespace BattleShipsV2
             return new Random();
         }
 
-        static void Display(int gridX, int gridY, string[,] gridObject,string[,] gridShoot)
+        static void Display(int gridX, int gridY, string[,] gridObject,string[,] gridShoot,int shipOnGrid)
         {
             Console.Clear();
             Console.WriteLine("   A  B  C  D  E  F  G  H  I  J");
@@ -102,7 +103,8 @@ namespace BattleShipsV2
                 
             }
 
-            Shoot(gridX, gridY, gridObject, gridShoot);
+            Console.WriteLine(shipOnGrid + " Left to Shoot");
+            Shoot(gridX, gridY, gridObject, gridShoot, shipOnGrid);
         }
 
     static string[,] DrawShip(int direction, int shipLength, string[,] grid, Random ranN)
@@ -181,7 +183,7 @@ namespace BattleShipsV2
             return true;
         }
 
-        static void Shoot(int grid_x, int grid_y, string[,] gridShoot, string[,] gridObject)
+        static void Shoot(int grid_x, int grid_y, string[,] gridShoot, string[,] gridObject, int shipOnGrid)
         {
             int shoot_x = 0;
             int shoot_y = 0;
@@ -268,12 +270,13 @@ namespace BattleShipsV2
             }
             else
             {
-                Display(grid_x, grid_y, gridShoot, gridObject);
+                Display(grid_x, grid_y, gridShoot, gridObject, shipOnGrid);
             }
 
             if (gridObject[shoot_x, shoot_y] == "V" || gridObject[shoot_x, shoot_y] == "H")
             {
                 gridShoot[shoot_x, shoot_y] = "X";
+                shipOnGrid--;
             }
             else
             {
@@ -281,7 +284,7 @@ namespace BattleShipsV2
             }
 
        
-            Display(grid_x, grid_y, gridShoot, gridObject);
+            Display(grid_x, grid_y, gridShoot, gridObject, shipOnGrid);
         }
     }
 }
