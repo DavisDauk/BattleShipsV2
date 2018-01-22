@@ -55,7 +55,7 @@ namespace BattleShipsV2
             }
 
 
-            Display(grid_x, grid_y, gridShoot);
+            Display(grid_x, grid_y, gridShoot, gridObject);
             Console.ReadLine();
         }
 
@@ -64,7 +64,7 @@ namespace BattleShipsV2
             return new Random();
         }
 
-        static void Display(int gridX, int gridY, string[,] gridObject)
+        static void Display(int gridX, int gridY, string[,] gridObject,string[,] gridShoot)
         {
             Console.Clear();
             Console.WriteLine("   A  B  C  D  E  F  G  H  I  J");
@@ -89,15 +89,20 @@ namespace BattleShipsV2
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                     }
+                    else if(gridObject[x,y] == "M")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
                     Console.Write("|" + gridObject[x, y] + "|");
                     Console.ForegroundColor = ConsoleColor.Gray;
                 }
 
                 Console.WriteLine("");
 
+                
             }
 
-
+            Shoot(gridX, gridY, gridObject, gridShoot);
         }
 
     static string[,] DrawShip(int direction, int shipLength, string[,] grid, Random ranN)
@@ -176,7 +181,7 @@ namespace BattleShipsV2
             return true;
         }
 
-        static void Shoot(int grid_x, int grid_y, string[,] gridObject)
+        static void Shoot(int grid_x, int grid_y, string[,] gridShoot, string[,] gridObject)
         {
             int shoot_x = 0;
             int shoot_y = 0;
@@ -187,8 +192,8 @@ namespace BattleShipsV2
             Console.WriteLine("input coordinate");
             coordinate = Console.ReadLine();
             length = coordinate.Length - 1;
-            Console.WriteLine("Lengtth" + length);
-            Console.ReadLine();
+           // Console.WriteLine("Lengtth" + length);
+           // Console.ReadLine();
             placeholder_1 = coordinate.Substring(0, 1);
             placeholder_2 = coordinate.Substring(1, length);
             Console.WriteLine(placeholder_1 + " " + placeholder_2);
@@ -218,6 +223,7 @@ namespace BattleShipsV2
                 Console.WriteLine("ERROR");
                 Console.ReadLine();
             }
+
             placeholder_3 = placeholder_3.ToLower();
 
             if (placeholder_3 == "a")
@@ -262,10 +268,20 @@ namespace BattleShipsV2
             }
             else
             {
-                Display(grid_x, grid_y, gridObject);
+                Display(grid_x, grid_y, gridShoot, gridObject);
             }
-            gridObject[shoot_x, shoot_y] = "X";
-            Display(grid_x, grid_y, gridObject);
+
+            if (gridObject[shoot_x, shoot_y] == "V" || gridObject[shoot_x, shoot_y] == "H")
+            {
+                gridShoot[shoot_x, shoot_y] = "X";
+            }
+            else
+            {
+                gridShoot[shoot_x, shoot_y] = "M";
+            }
+
+       
+            Display(grid_x, grid_y, gridShoot, gridObject);
         }
     }
 }
