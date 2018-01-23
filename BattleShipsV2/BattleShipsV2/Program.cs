@@ -275,14 +275,19 @@ namespace BattleShipsV2
 
             if (gridObject[shoot_x, shoot_y] == "V" || gridObject[shoot_x, shoot_y] == "H")
             {
+                
+
+                if (gridShoot[shoot_x, shoot_y] == "~")
+                {
+                    shipOnGrid--;
+                }
+
                 gridShoot[shoot_x, shoot_y] = "X";
-                shipOnGrid--;
             }
             else
             {
                 gridShoot[shoot_x, shoot_y] = "M";
             }
-
        
             Display(grid_x, grid_y, gridShoot, gridObject, shipOnGrid);
         }
