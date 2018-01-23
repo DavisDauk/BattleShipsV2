@@ -185,6 +185,9 @@ namespace BattleShipsV2
 
         static void Shoot(int grid_x, int grid_y, string[,] gridShoot, string[,] gridObject, int shipOnGrid)
         {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+            player.Play();
+
             int shoot_x = 0;
             int shoot_y = 0;
             string coordinate;
