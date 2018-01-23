@@ -185,8 +185,7 @@ namespace BattleShipsV2
 
         static void Shoot(int grid_x, int grid_y, string[,] gridShoot, string[,] gridObject, int shipOnGrid)
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-            player.Play();
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer("Sounds\\Sheep.wav");
 
             int shoot_x = 0;
             int shoot_y = 0;
@@ -283,6 +282,7 @@ namespace BattleShipsV2
                 if (gridShoot[shoot_x, shoot_y] == "~")
                 {
                     shipOnGrid--;
+                    player.Play();
                 }
 
                 gridShoot[shoot_x, shoot_y] = "X";
